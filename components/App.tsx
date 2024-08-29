@@ -24,7 +24,6 @@ import { useRealmQuery } from '@hooks/queries/realm'
 import { useRealmConfigQuery } from '@hooks/queries/realmConfig'
 import {
   ConnectionProvider,
-  WalletProvider,
 } from '@solana/wallet-adapter-react'
 import useLegacyConnectionContext from '@hooks/useLegacyConnectionContext'
 import { DEVNET_RPC, MAINNET_RPC } from 'constants/endpoints'
@@ -32,6 +31,11 @@ import {
   SquadsEmbeddedWalletAdapter,
   detectEmbeddedInSquadsIframe,
 } from '@sqds/iframe-adapter'
+import {
+  MagicLinkWalletModalProvider,
+} from "@hoodieshq/solana-magic-link-wallet-adapter-react-ui"
+import { MagicLinkWalletProvider } from './MagicLinkWalletProvider'
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui"
 import { WALLET_PROVIDERS } from '@utils/wallet-adapters'
 import { tryParsePublicKey } from '@tools/core/pubkey'
 import { useAsync } from 'react-async-hook'
@@ -86,9 +90,17 @@ export function App(props: Props) {
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={supportedWallets}>
-        <AppContents {...props} />{' '}
-      </WalletProvider>
+        <MagicLinkWalletProvider wallets={supportedWallets}>
+          <WalletModalProvider>
+	    <MagicLinkWalletModalProvider
+	      magicLinkApiKey={process.env.NEXT_PUBLIC_MAGIC_LINK_PUBLIC_API_KEY ?? ""}
+	      solanaRpcUrl="https://api.devnet.solana.com"
+	      magicLinkLogins={[{ type: "emailOTP" }]}
+	    >
+	      <AppContents {...props} />
+	    </MagicLinkWalletModalProvider>
+	  </WalletModalProvider>
+        </MagicLinkWalletProvider>
     </ConnectionProvider>
   )
 }

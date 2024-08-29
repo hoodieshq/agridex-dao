@@ -16,6 +16,10 @@ import {
   WalletAdapterNetwork,
   WalletReadyState,
 } from '@solana/wallet-adapter-base'
+import {
+  MagicLinkWalletAdapter
+} from "@hoodieshq/solana-wallet-adapter-magic-link"
+
 
 const BACKPACK_PROVIDER = {
   name: 'Backpack',
@@ -93,6 +97,13 @@ const WALLET_CONNECT = {
       },
     },
   }),
+}
+
+// TODO: allow to specify adapter without endpoint address
+const _MAGIC_LINK = {
+  name: MagicLinkWalletAdapter.name,
+  url: 'https://magic.link',
+  //adapter: new MagicLinkWalletAdapter(),
 }
 
 export const WALLET_PROVIDERS = [

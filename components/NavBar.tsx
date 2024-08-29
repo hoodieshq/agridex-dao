@@ -6,7 +6,8 @@ import { ExternalLinkIcon } from '@heroicons/react/outline'
 import DialectNotifications from './Dialect'
 
 const ConnectWalletButtonDynamic = dynamic(
-  async () => await import('./ConnectWalletButton'),
+  //async () => await import('./ConnectWalletButton'),
+  async () => await import('./ConnectMagicLinkMultiWalletButton'),
   { ssr: false }
 )
 
