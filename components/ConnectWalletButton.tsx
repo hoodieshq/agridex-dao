@@ -18,6 +18,8 @@ import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { DEFAULT_PROVIDER } from '../utils/wallet-adapters'
 import useViewAsWallet from '@hooks/useViewAsWallet'
 import { ProfileName } from "@components/Profile/ProfileName";
+import { MagicLinkWalletAdapter, MagicLinkWalletName } from '@hoodieshq/solana-wallet-adapter-magic-link'
+import { useMagicWalletModal } from '@hoodieshq/solana-magic-link-wallet-adapter-react-ui'
 
 const StyledWalletProviderLabel = styled.p`
   font-size: 0.65rem;
@@ -28,6 +30,7 @@ const ConnectWalletButton = (props) => {
   const { pathname, query, replace } = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const debugAdapter = useViewAsWallet()
+  const { setVisible, visible } = useMagicWalletModal()
 
   const {
     wallets,
@@ -45,13 +48,27 @@ const ConnectWalletButton = (props) => {
     if (wallet === null) select(DEFAULT_PROVIDER.name as WalletName)
   }, [select, wallet])
 
+const handleMagicLinkConnect = useCallback(async function onMagicLinkConnect() {
+	const adapter = wallet?.adapter as MagicLinkWalletAdapter
+	console.log({ adapter })
+	setTimeout(() => setVisible(true), 0)
+	console.log("modal", visible)	
+	adapter.setLoginOptions({ type: "emailOTP", email: "sergo@hoodies.team" })
+
+	return connect()
+}, [wallet?.adapter, visible, setVisible, connect])
+
   const handleConnectDisconnect = useCallback(async () => {
     setIsLoading(true)
     try {
       if (connected) {
         await disconnect()
       } else {
-        await connect()
+	if (wallet?.adapter.name === MagicLinkWalletName) {
+	  await handleMagicLinkConnect()
+	} else {
+          await connect()
+	}
       }
     } catch (e: any) {
       if (e.name === 'WalletNotReadyError') {
@@ -63,7 +80,7 @@ const ConnectWalletButton = (props) => {
       console.warn('handleConnectDisconnect', e)
     }
     setIsLoading(false)
-  }, [connect, connected, disconnect])
+  }, [connect, connected, disconnect, handleMagicLinkConnect, wallet?.adapter])
 
   const currentCluster = query.cluster
 

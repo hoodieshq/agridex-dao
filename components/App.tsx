@@ -24,6 +24,7 @@ import { useRealmQuery } from '@hooks/queries/realm'
 import { useRealmConfigQuery } from '@hooks/queries/realmConfig'
 import {
   ConnectionProvider,
+  WalletProvider,
 } from '@solana/wallet-adapter-react'
 import useLegacyConnectionContext from '@hooks/useLegacyConnectionContext'
 import { DEVNET_RPC, MAINNET_RPC } from 'constants/endpoints'
@@ -32,15 +33,16 @@ import {
   detectEmbeddedInSquadsIframe,
 } from '@sqds/iframe-adapter'
 import {
-  MagicLinkWalletModalProvider,
+  MagicLinkWalletModalProvider, 
+  MagicWalletProvider,
 } from "@hoodieshq/solana-magic-link-wallet-adapter-react-ui"
-import { MagicLinkWalletProvider } from './MagicLinkWalletProvider'
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui"
 import { WALLET_PROVIDERS } from '@utils/wallet-adapters'
 import { tryParsePublicKey } from '@tools/core/pubkey'
 import { useAsync } from 'react-async-hook'
 import { useVsrClient } from '../VoterWeightPlugins/useVsrClient'
 import { useRealmVoterWeightPlugins } from '@hooks/useRealmVoterWeightPlugins'
+import {WalletAdapterNetwork} from '@solana/wallet-adapter-base'
 
 const Notifications = dynamic(() => import('../components/Notification'), {
   ssr: false,
@@ -90,17 +92,19 @@ export function App(props: Props) {
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-        <MagicLinkWalletProvider wallets={supportedWallets}>
+      <MagicWalletProvider>
+        <WalletProvider wallets={supportedWallets}>
           <WalletModalProvider>
 	    <MagicLinkWalletModalProvider
 	      magicLinkApiKey={process.env.NEXT_PUBLIC_MAGIC_LINK_PUBLIC_API_KEY ?? ""}
-	      solanaRpcUrl="https://api.devnet.solana.com"
 	      magicLinkLogins={[{ type: "emailOTP" }]}
+	      network={cluster as WalletAdapterNetwork}
 	    >
 	      <AppContents {...props} />
 	    </MagicLinkWalletModalProvider>
 	  </WalletModalProvider>
-        </MagicLinkWalletProvider>
+        </WalletProvider>
+      </MagicWalletProvider>
     </ConnectionProvider>
   )
 }
