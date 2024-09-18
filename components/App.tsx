@@ -32,21 +32,18 @@ import {
   SquadsEmbeddedWalletAdapter,
   detectEmbeddedInSquadsIframe,
 } from '@sqds/iframe-adapter'
-import {
-  MagicLinkWalletModalProvider, 
-  MagicWalletProvider,
-} from "@hoodieshq/solana-magic-link-wallet-adapter-react-ui"
-import { WalletModalProvider } from "@solana/wallet-adapter-react-ui"
 import { WALLET_PROVIDERS } from '@utils/wallet-adapters'
 import { tryParsePublicKey } from '@tools/core/pubkey'
 import { useAsync } from 'react-async-hook'
 import { useVsrClient } from '../VoterWeightPlugins/useVsrClient'
 import { useRealmVoterWeightPlugins } from '@hooks/useRealmVoterWeightPlugins'
-import {WalletAdapterNetwork} from '@solana/wallet-adapter-base'
+import { MagicLinkProvider } from "@components/MagicLinkProvider"
 
 const Notifications = dynamic(() => import('../components/Notification'), {
   ssr: false,
 })
+
+const _MagicLinkProvider = dynamic(async () => await import("@components/MagicLinkProvider"), { ssr: false })
 
 const GoogleTag = React.memo(
   function GoogleTag() {
@@ -92,19 +89,11 @@ export function App(props: Props) {
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <MagicWalletProvider>
-        <WalletProvider wallets={supportedWallets}>
-          <WalletModalProvider>
-	    <MagicLinkWalletModalProvider
-	      magicLinkApiKey={process.env.NEXT_PUBLIC_MAGIC_LINK_PUBLIC_API_KEY ?? ""}
-	      magicLinkLogins={[{ type: "emailOTP" }]}
-	      network={cluster as WalletAdapterNetwork}
-	    >
-	      <AppContents {...props} />
-	    </MagicLinkWalletModalProvider>
-	  </WalletModalProvider>
-        </WalletProvider>
-      </MagicWalletProvider>
+      <WalletProvider wallets={supportedWallets}>
+	<MagicLinkProvider>
+	  <AppContents {...props} />
+	</MagicLinkProvider>    
+      </WalletProvider>
     </ConnectionProvider>
   )
 }
