@@ -498,3 +498,6 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/word-break#values */
 .dialect > div > button {
   border-radius: 999px !important;
 }
+
+/** MagicLink styles*/
+@import url("@agridex-international/solana-magic-link-wallet-adapter-react-ui/styles.css");

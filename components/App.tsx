@@ -37,10 +37,13 @@ import { tryParsePublicKey } from '@tools/core/pubkey'
 import { useAsync } from 'react-async-hook'
 import { useVsrClient } from '../VoterWeightPlugins/useVsrClient'
 import { useRealmVoterWeightPlugins } from '@hooks/useRealmVoterWeightPlugins'
+import { MagicLinkProvider } from "@components/MagicLinkProvider"
 
 const Notifications = dynamic(() => import('../components/Notification'), {
   ssr: false,
 })
+
+const _MagicLinkProvider = dynamic(async () => await import("@components/MagicLinkProvider"), { ssr: false })
 
 const GoogleTag = React.memo(
   function GoogleTag() {
@@ -87,7 +90,9 @@ export function App(props: Props) {
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={supportedWallets}>
-        <AppContents {...props} />{' '}
+        <MagicLinkProvider>
+          <AppContents {...props} />
+        </MagicLinkProvider>    
       </WalletProvider>
     </ConnectionProvider>
   )

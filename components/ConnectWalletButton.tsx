@@ -18,6 +18,8 @@ import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { DEFAULT_PROVIDER } from '../utils/wallet-adapters'
 import useViewAsWallet from '@hooks/useViewAsWallet'
 import { ProfileName } from "@components/Profile/ProfileName";
+import { MagicLinkWalletName } from '@agridex-international/solana-wallet-adapter-magic-link'
+import { useMagicWalletModal } from '@agridex-international/solana-magic-link-wallet-adapter-react-ui'
 
 const StyledWalletProviderLabel = styled.p`
   font-size: 0.65rem;
@@ -28,6 +30,7 @@ const ConnectWalletButton = (props) => {
   const { pathname, query, replace } = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const debugAdapter = useViewAsWallet()
+  const { setVisible } = useMagicWalletModal()
 
   const {
     wallets,
@@ -51,7 +54,11 @@ const ConnectWalletButton = (props) => {
       if (connected) {
         await disconnect()
       } else {
-        await connect()
+        if (wallet?.adapter.name === MagicLinkWalletName) {
+          setVisible(true)
+        } else {
+          await connect()
+        }
       }
     } catch (e: any) {
       if (e.name === 'WalletNotReadyError') {
@@ -63,7 +70,7 @@ const ConnectWalletButton = (props) => {
       console.warn('handleConnectDisconnect', e)
     }
     setIsLoading(false)
-  }, [connect, connected, disconnect])
+  }, [connect, connected, disconnect, setVisible, wallet])
 
   const currentCluster = query.cluster
 
