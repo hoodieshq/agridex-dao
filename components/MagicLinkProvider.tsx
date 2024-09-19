@@ -8,11 +8,11 @@ export function MagicLinkProvider({ children }: React.PropsWithChildren<any>){
 
   return (
       <MagicLinkWalletModalProvider
-    	enableOtherWallets={false}
-	magicLinkLogins={[{type: "emailOTP"}]}
-	wallet={wallet}
-	wallets={wallets}
-	connect={connect}
+    	  enableOtherWallets={false}
+	      magicLinkLogins={[{type: "emailOTP"}]}
+	      wallet={wallet}
+	      wallets={wallets}
+	      connect={connect}
       >
         {children}
       </MagicLinkWalletModalProvider>
