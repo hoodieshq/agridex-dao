@@ -18,8 +18,8 @@ import { ExternalLinkIcon } from '@heroicons/react/outline'
 import { DEFAULT_PROVIDER } from '../utils/wallet-adapters'
 import useViewAsWallet from '@hooks/useViewAsWallet'
 import { ProfileName } from "@components/Profile/ProfileName";
-import { MagicLinkWalletName } from '@hoodieshq/solana-wallet-adapter-magic-link'
-import { useMagicWalletModal } from '@hoodieshq/solana-magic-link-wallet-adapter-react-ui'
+import { MagicLinkWalletName } from '@agridex-international/solana-wallet-adapter-magic-link'
+import { useMagicWalletModal } from '@agridex-international/solana-magic-link-wallet-adapter-react-ui'
 
 const StyledWalletProviderLabel = styled.p`
   font-size: 0.65rem;

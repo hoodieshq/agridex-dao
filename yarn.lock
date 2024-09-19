@@ -7,6 +7,36 @@
   resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.10.1.tgz#63430d04bd8c5e74f8d7d049338f1cd9d4f02069"
   integrity sha512-96Z2IP3mYmF1Xg2cDm8f1gWGf/HUVedQ3FMifV4kG/PQ4yEP51xDtRAEfhVNt5f/uzpNkZHwWQuUcu6D6K+Ekw==
 
+"@agridex-international/solana-magic-link-wallet-adapter-react-ui@1.4.1":
+  version "1.4.1"
+  resolved "https://npm.pkg.github.com/download/@AgriDex-International/solana-magic-link-wallet-adapter-react-ui/1.4.1/c6412ae00a7686cc9b1569fe7417fc6feee60677#c6412ae00a7686cc9b1569fe7417fc6feee60677"
+  integrity sha512-iG7Xfm6M4LOG5+ckn+z/DfvgBOEjdHaDYuj5y6a1eo/Rx8JYff0ytWjNsZ8iKa6jBdlMBnlAt/8Uw+1UTcAQZQ==
+  dependencies:
+    "@agridex-international/solana-wallet-adapter-magic-link" "1.4.1"
+    "@solana/wallet-adapter-base" "^0.9.23"
+    "@solana/wallet-adapter-base-ui" "^0.1.2"
+    "@solana/wallet-adapter-react" "^0.15.35"
+    "@solana/wallet-adapter-react-ui" "^0.9.35"
+    "@types/debug" "^4.1.12"
+    debug "^4.3.7"
+    libphonenumber-js "^1.11.5"
+    react "^18"
+    react-dom "^18"
+
+"@agridex-international/solana-wallet-adapter-magic-link@1.4.1":
+  version "1.4.1"
+  resolved "https://npm.pkg.github.com/download/@AgriDex-International/solana-wallet-adapter-magic-link/1.4.1/c7ac907ef20a9227a3c2ccef009fc932413ae4f4#c7ac907ef20a9227a3c2ccef009fc932413ae4f4"
+  integrity sha512-LJvbRmQk1UcwxGtxbijjQ2VacGAqgXHPDVy1jJPIWvcXvHM3kKKGxX8J1+cEfINZZl5bhIUGeYMWgwuoOZ4MHg==
+  dependencies:
+    "@magic-ext/solana" "^25.1.4"
+    "@magic-sdk/provider" "^28.0.6"
+    "@solana/wallet-adapter-base" "^0.9.23"
+    "@solana/web3.js" "^1.93.1"
+    "@types/debug" "^4.1.12"
+    debug "^4.3.7"
+    magic-sdk "^28.0.7"
+    query-string "^9.1.0"
+
 "@ampproject/remapping@^2.1.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.2.0.tgz#56c133824780de3174aed5ab6834f3026790154d"
@@ -1675,36 +1705,6 @@
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.6.tgz#35dd26987228b39ef2316db3b1245c42eb19e324"
   integrity sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==
-
-"@hoodieshq/solana-magic-link-wallet-adapter-react-ui@1.3.8":
-  version "1.3.8"
-  resolved "https://npm.pkg.github.com/download/@hoodieshq/solana-magic-link-wallet-adapter-react-ui/1.3.8/7a85ff272b2982087b37dbfa8e858b6d116558d3#7a85ff272b2982087b37dbfa8e858b6d116558d3"
-  integrity sha512-vID3HNArRVthiX9eVKKxB2IjkzgKUme5eDj7CXaFMrtam3SK9pqXqaMgkNkwOnog22OZ9L/2ka/4LhXi+m8fcw==
-  dependencies:
-    "@hoodieshq/solana-wallet-adapter-magic-link" "1.3.8"
-    "@solana/wallet-adapter-base" "^0.9.23"
-    "@solana/wallet-adapter-base-ui" "^0.1.2"
-    "@solana/wallet-adapter-react" "^0.15.35"
-    "@solana/wallet-adapter-react-ui" "^0.9.35"
-    "@types/debug" "^4.1.12"
-    debug "^4.3.7"
-    libphonenumber-js "^1.11.5"
-    react "^18"
-    react-dom "^18"
-
-"@hoodieshq/solana-wallet-adapter-magic-link@1.3.8":
-  version "1.3.8"
-  resolved "https://npm.pkg.github.com/download/@hoodieshq/solana-wallet-adapter-magic-link/1.3.8/99aaff3a3a8d5fe2957e5b2d9e08e6d59c9cec31#99aaff3a3a8d5fe2957e5b2d9e08e6d59c9cec31"
-  integrity sha512-1bK0ZEgmKNJm0SD8MsQPGi/+EwyYPOtKWQmbxveRD4nkvr6MqzmF51IPdpvz/jEaEHIZ+qwOkn6AQeoB8wJHkg==
-  dependencies:
-    "@magic-ext/solana" "^25.1.4"
-    "@magic-sdk/provider" "^28.0.6"
-    "@solana/wallet-adapter-base" "^0.9.23"
-    "@solana/web3.js" "^1.93.1"
-    "@types/debug" "^4.1.12"
-    debug "^4.3.7"
-    magic-sdk "^28.0.7"
-    query-string "^9.1.0"
 
 "@hookform/resolvers@2.8.10":
   version "2.8.10"

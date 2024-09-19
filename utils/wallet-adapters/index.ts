@@ -16,7 +16,7 @@ import {
   WalletAdapterNetwork,
   WalletReadyState,
 } from '@solana/wallet-adapter-base'
-import { MagicLinkWalletAdapter } from "@hoodieshq/solana-wallet-adapter-magic-link"
+import { MagicLinkWalletAdapter } from "@agridex-international/solana-wallet-adapter-magic-link"
 
 const BACKPACK_PROVIDER = {
   name: 'Backpack',

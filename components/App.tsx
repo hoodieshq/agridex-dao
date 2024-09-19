@@ -90,9 +90,9 @@ export function App(props: Props) {
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={supportedWallets}>
-	<MagicLinkProvider>
-	  <AppContents {...props} />
-	</MagicLinkProvider>    
+        <MagicLinkProvider>
+          <AppContents {...props} />
+        </MagicLinkProvider>    
       </WalletProvider>
     </ConnectionProvider>
   )
